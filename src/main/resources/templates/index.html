@@ -35,6 +35,7 @@
                 <td th:text="${trabajador.id}"></td>
                 <td th:text="${trabajador.nombre}"></td>
                 <td th:text="${trabajador.apellido}"></td>
+                <td th:text="${trabajador.getDepartamento()}"></td>
                 <td>
                     <form th:action="@{/borrar/{id}(id=${trabajador.id})}" method="post">
                         <button type="submit" id="borrar">Borrar user</button>
@@ -46,8 +47,12 @@
             </tr>
             </tbody>
         </table>
-        <div id="newUserButton">
-            <button type="button" onclick="nuevoUser()">Nuevo</button>
+            <button type="submit" id="nuevoUser">Nuevo</button>
+        <div class="modal fade" id="modalNuevoUser" tabindex="-1" aria-labelledby="modalNuevoUserLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="modal-content">
+                </div>
+            </div>
         </div>
 
     </div>
@@ -61,5 +66,7 @@
     </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>
