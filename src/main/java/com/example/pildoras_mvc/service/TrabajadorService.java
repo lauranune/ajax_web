@@ -10,13 +10,4 @@ public interface TrabajadorService {
    public TrabajadorDto findById(Long id);
    public TrabajadorDto update(TrabajadorDto trabajadorDto);
    public void delete(Long id);
-
-    /**
-     * public TrabajadorDto save(TrabajadorDto trabajadorDto);
-     * public List<TrabajadorDto> getTrabajador();
-     * public TrabajadorDto getTrabajador(Integer trabajadorid);
-     * public TrabajadorDto update (Integer TrabajadorId, TrabajadorDto trabajadorDto);
-     * public TrabajadorDto delete(Integer trabajadorId);
-     */
-
 }
