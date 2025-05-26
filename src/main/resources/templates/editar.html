@@ -15,8 +15,7 @@
             </div>
             <div class="modal-body">
                 <form id="formEditar" method="post" th:action="@{/editar}" th:object="${trabajador}">
-                    <input type="hidden" id="edit-id" name="id">
-
+                    <input type="hidden" id="edit-id" name="id" th:field="*{id}">
                     <div class="mb-3">
                         <label for="edit-nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="edit-nombre" name="nombre" th:field="*{nombre}" required>

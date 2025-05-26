@@ -76,19 +76,15 @@ function bindFormulario() {
                     url: `/editar?id=${id}`,
                     type: 'GET',
                     success: function (html) {
-                        // Cargamos el fragmento del modal en el DOM (puedes usar un div oculto)
                         $('body').append(html);
 
-                        // Mostramos el modal
                         const modal = new bootstrap.Modal(document.getElementById('modalEditar'));
                         modal.show();
 
-                        // Cuando se cierra el modal, lo eliminamos del DOM para evitar duplicados
                         $('#modalEditar').on('hidden.bs.modal', function () {
                             $(this).remove();
                         });
 
-                        // Bind del submit
                         $('#formEditar').on('submit', function (e) {
                             e.preventDefault();
 
@@ -101,7 +97,7 @@ function bindFormulario() {
                             };
 
                             $.ajax({
-                                url: `/editar/${id}`,
+                                url: `/editar?id=${id}`,
                                 type: 'POST',
                                 contentType: 'application/json',
                                 data: JSON.stringify(datos),

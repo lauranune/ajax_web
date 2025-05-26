@@ -2,6 +2,7 @@ package com.example.pildoras_mvc.service;
 
 import com.example.pildoras_mvc.dto.DepartamentoDto;
 import com.example.pildoras_mvc.entity.Departamento;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -59,12 +59,24 @@ public class TrabajadorController {
   public String mostrarEditar(@RequestParam Long id, Model model){
     Trabajador trabajador= trabajadorRepository.findById(id)
             .orElse(new Trabajador());
-    List<Departamento> departamentos = departamentoService.findAll();
+    List<Departamento> departamentos = departamentoRepository.findAll();
 
     model.addAttribute("trabajador", trabajador);
     model.addAttribute("departamentos", departamentos);
     return "editar :: modalEditar";
   }
+
+//  @GetMapping("/editar")
+//  public ModelAndView mostrarEditar(@RequestParam Long id) {
+//    Trabajador trabajador = trabajadorRepository.findById(id)
+//            .orElse(new Trabajador());
+//    List<Departamento> departamentos = departamentoService.findAll();
+//
+//    ModelAndView mav = new ModelAndView("editar :: modalEditar");
+//    mav.addObject("trabajador", trabajador);
+//    mav.addObject("departamentos", departamentos);
+//    return mav;
+//  }
 
   @PostMapping("/editar")
   @ResponseBody

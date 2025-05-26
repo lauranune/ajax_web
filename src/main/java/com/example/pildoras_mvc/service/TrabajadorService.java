@@ -1,6 +1,8 @@
 package com.example.pildoras_mvc.service;
 
 import com.example.pildoras_mvc.dto.TrabajadorDto;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface TrabajadorService {
