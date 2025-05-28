@@ -1,7 +1,9 @@
 package com.example.pildoras_mvc.controlador;
 
+import com.example.pildoras_mvc.dto.TrabajadorDto;
 import com.example.pildoras_mvc.entity.Departamento;
 import com.example.pildoras_mvc.entity.Trabajador;
+import com.example.pildoras_mvc.mapper.TrabajadorMapper;
 import com.example.pildoras_mvc.repository.TrabajadorRepository;
 import com.example.pildoras_mvc.repository.DepartamentoRepository;
 import com.example.pildoras_mvc.service.DepartamentoService;
@@ -26,8 +28,22 @@ public class TrabajadorController {
     private TrabajadorService trabajadorService;
     @Autowired
     private DepartamentoService departamentoService;
+    @Autowired
+    private TrabajadorMapper trabajadorMapper;
 
-  @GetMapping("/")
+//  @GetMapping("/maptest")
+//    public String mapTest(Model model) {
+//    TrabajadorDto trabajadorDto = new TrabajadorDto();
+//    trabajadorDto.setNombre("Trabajador");
+//    trabajadorDto.setApellido("Trabajador");
+//    model.addAttribute("trabajador", trabajadorDto);
+//
+//    Trabajador trabajador = trabajadorMapper.toEntity(trabajadorDto);
+//    trabajadorRepository.save(trabajador);
+//    return "maptest";
+//  }
+
+    @GetMapping("/")
     public String index(Model model) {
       List <Trabajador> trabajadores = trabajadorRepository.findAll();
       model.addAttribute("trabajadores", trabajadores);
