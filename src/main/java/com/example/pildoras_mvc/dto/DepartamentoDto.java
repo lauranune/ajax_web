@@ -9,7 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepartamentoDto implements Serializable {
-    private int id;
+    private Long id;
     private String nombre;
 
 }

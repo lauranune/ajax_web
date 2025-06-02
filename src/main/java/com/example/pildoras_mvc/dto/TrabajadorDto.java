@@ -1,31 +1,22 @@
 package com.example.pildoras_mvc.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 
-/**
- * DTO for {@link com.example.pildoras_mvc.entity.Trabajador}
- */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class TrabajadorDto implements Serializable {
     private Long id;
     private String nombre;
     private String apellido;
-    private DepartamentoDto departamento;
+    private Long departamentoId;
 
-    /**
-     * DTO for {@link com.example.pildoras_mvc.entity.Departamento}
-     */
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class DepartamentoDto implements Serializable {
-        private Long id;
-        private String nombre_dept;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getApellido() { return apellido; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
+
+    public Long getDepartamentoId() { return departamentoId; }
+    public void setDepartamentoId(Long departamentoId) { this.departamentoId = departamentoId; }
 }

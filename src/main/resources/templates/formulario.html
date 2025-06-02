@@ -16,8 +16,8 @@
             <input type="text" class="form-control" id="apellido" name="apellido" th:field="*{apellido}"required>
         </div>
         <div class="mb-3">
-            <label for="departamento" class="form-label">Departamento</label>
-            <select class="form-control" id="departamento" th:field="*{departamento}" required>
+            <label class="form-label">Departamento</label>
+            <select class="form-control" id="departamentoId" th:field="*{departamentoId}" required>
                 <option value="" disabled selected>Seleccione un departamento</option>
                 <option th:each="dep : ${departamentos}"
                         th:value="${dep.id}"

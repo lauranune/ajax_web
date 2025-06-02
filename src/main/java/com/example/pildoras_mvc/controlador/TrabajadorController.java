@@ -6,8 +6,6 @@ import com.example.pildoras_mvc.entity.Trabajador;
 import com.example.pildoras_mvc.mapper.TrabajadorMapper;
 import com.example.pildoras_mvc.repository.TrabajadorRepository;
 import com.example.pildoras_mvc.repository.DepartamentoRepository;
-import com.example.pildoras_mvc.service.DepartamentoService;
-import com.example.pildoras_mvc.service.TrabajadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,23 +23,7 @@ public class TrabajadorController {
     @Autowired
     private DepartamentoRepository departamentoRepository;
     @Autowired
-    private TrabajadorService trabajadorService;
-    @Autowired
-    private DepartamentoService departamentoService;
-    @Autowired
     private TrabajadorMapper trabajadorMapper;
-
-//  @GetMapping("/maptest")
-//    public String mapTest(Model model) {
-//    TrabajadorDto trabajadorDto = new TrabajadorDto();
-//    trabajadorDto.setNombre("Trabajador");
-//    trabajadorDto.setApellido("Trabajador");
-//    model.addAttribute("trabajador", trabajadorDto);
-//
-//    Trabajador trabajador = trabajadorMapper.toEntity(trabajadorDto);
-//    trabajadorRepository.save(trabajador);
-//    return "maptest";
-//  }
 
     @GetMapping("/")
     public String index(Model model) {
@@ -52,18 +34,19 @@ public class TrabajadorController {
 
   @GetMapping("/formulario")
   public String mostrarFormulario(Model model) {
-    model.addAttribute("trabajador", new Trabajador());
+    model.addAttribute("trabajador", new TrabajadorDto());
 
     List<Departamento> departamentos = departamentoRepository.findAll();
     model.addAttribute("departamentos", departamentos);
     return "formulario :: contenido";
   }
 
-  @PostMapping("/nuevo")
-  public String nuevo(Trabajador trabajador) {
-    trabajadorRepository.save(trabajador);
-    return "redirect:/";
-  }
+    @PostMapping("/nuevo")
+    public String nuevo(@ModelAttribute TrabajadorDto trabajadorDto) {
+        Trabajador trabajador = trabajadorMapper.toEntity(trabajadorDto);
+        trabajadorRepository.save(trabajador);
+        return "redirect:/";
+    }
 
   @GetMapping("/borrar/{id}")
   public String borrar(@PathVariable Long id){
@@ -75,29 +58,23 @@ public class TrabajadorController {
   public String mostrarEditar(@RequestParam Long id, Model model){
     Trabajador trabajador= trabajadorRepository.findById(id)
             .orElse(new Trabajador());
-    List<Departamento> departamentos = departamentoRepository.findAll();
+    TrabajadorDto dto = trabajadorMapper.toTrabajadorDto(trabajador);
 
-    model.addAttribute("trabajador", trabajador);
+    List<Departamento> departamentos = departamentoRepository.findAll();
+    model.addAttribute("trabajador", dto);
     model.addAttribute("departamentos", departamentos);
     return "editar :: modalEditar";
   }
 
-//  @GetMapping("/editar")
-//  public ModelAndView mostrarEditar(@RequestParam Long id) {
-//    Trabajador trabajador = trabajadorRepository.findById(id)
-//            .orElse(new Trabajador());
-//    List<Departamento> departamentos = departamentoService.findAll();
-//
-//    ModelAndView mav = new ModelAndView("editar :: modalEditar");
-//    mav.addObject("trabajador", trabajador);
-//    mav.addObject("departamentos", departamentos);
-//    return mav;
-//  }
-
   @PostMapping("/editar")
   @ResponseBody
-  public ResponseEntity<String> editar(@RequestBody Trabajador trabajador) {
-    trabajadorRepository.save(trabajador);
+  public ResponseEntity<String> editar(@RequestBody TrabajadorDto dto) {
+      Optional<Trabajador> optional = trabajadorRepository.findById(dto.getId());
+      if (optional.isPresent()) {
+          Trabajador trabajador = optional.get();
+          trabajadorMapper.updateTrabajador(trabajador, dto);
+          trabajadorRepository.save(trabajador);
+      }
     return ResponseEntity.ok("Guardado");
   }
 }
