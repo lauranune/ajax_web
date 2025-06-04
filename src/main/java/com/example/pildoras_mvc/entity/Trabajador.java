@@ -1,6 +1,8 @@
 package com.example.pildoras_mvc.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ public class Trabajador {
     private Long id;
 
     private String nombre;
+
     private String apellido;
 
     @ManyToOne

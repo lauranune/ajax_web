@@ -6,10 +6,12 @@ import com.example.pildoras_mvc.entity.Trabajador;
 import com.example.pildoras_mvc.mapper.TrabajadorMapper;
 import com.example.pildoras_mvc.repository.TrabajadorRepository;
 import com.example.pildoras_mvc.repository.DepartamentoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +44,13 @@ public class TrabajadorController {
   }
 
     @PostMapping("/nuevo")
-    public String nuevo(@ModelAttribute TrabajadorDto trabajadorDto) {
+    public String nuevo(@Valid @ModelAttribute("trabajador") TrabajadorDto trabajadorDto, BindingResult result, Model model) {
+
+        if(result.hasErrors()){
+            model.addAttribute("departamentos", departamentoRepository.findAll());
+            return "formulario :: contenido";
+        }
+
         Trabajador trabajador = trabajadorMapper.toEntity(trabajadorDto);
         trabajadorRepository.save(trabajador);
         return "redirect:/";
@@ -67,14 +75,19 @@ public class TrabajadorController {
   }
 
   @PostMapping("/editar")
-  @ResponseBody
-  public ResponseEntity<String> editar(@RequestBody TrabajadorDto dto) {
-      Optional<Trabajador> optional = trabajadorRepository.findById(dto.getId());
+  public String editar(@ModelAttribute("trabajador") @ Valid TrabajadorDto trabajadorDto, BindingResult result, Model model) {
+
+        if(result.hasErrors()){
+          model.addAttribute("departamentos", departamentoRepository.findAll());
+          return "editar :: modalEditar";
+      }
+
+        Optional<Trabajador> optional = trabajadorRepository.findById(trabajadorDto.getId());
       if (optional.isPresent()) {
           Trabajador trabajador = optional.get();
-          trabajadorMapper.updateTrabajador(trabajador, dto);
+          trabajadorMapper.updateTrabajador(trabajador, trabajadorDto);
           trabajadorRepository.save(trabajador);
       }
-    return ResponseEntity.ok("Guardado");
+    return "redirect:/";
   }
 }

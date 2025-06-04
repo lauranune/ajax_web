@@ -6,14 +6,16 @@
 </head>
 <body>
 <div th:fragment="contenido" >
-    <form id="formContainer" th:action="@{/nuevo}" th:object="${trabajador}" method="post">
+    <form id="formNuevoTrabajador" th:action="@{/nuevo}" th:object="${trabajador}" method="post">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" required>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
         </div>
         <div class="mb-3">
             <label for="apellido" class="form-label">Apellido</label>
             <input type="text" class="form-control" id="apellido" name="apellido" th:field="*{apellido}"required>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
         </div>
         <div class="mb-3">
             <label class="form-label">Departamento</label>

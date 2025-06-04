@@ -18,9 +18,15 @@ function bindFormulario() {
             url: '/nuevo',
             type: 'POST',
             data: $(this).serialize(),
-            success: function () {
-                alert('Trabajador creado correctamente');
-                location.reload();
+            success: function (data) {
+                if ($(data).find(".alert.alert-warning").length > 0) {
+                    $('#formContainer').html(data);
+                    bindFormulario();
+                }else {
+                    alert('Trabajador creado correctamente');
+                    location.reload();
+                }
+
             },
             error: function () {
                 alert('Error al guardar el trabajador');
@@ -88,22 +94,13 @@ function bindFormulario() {
                         $('#formEditar').on('submit', function (e) {
                             e.preventDefault();
 
-                            const id = $('#edit-id').val();
-                            const datos = {
-                                id: id,
-                                nombre: $('#edit-nombre').val(),
-                                apellido: $('#edit-apellido').val(),
-                                departamento: { id: $('#edit-departamento').val() }
-                            };
-
                             $.ajax({
-                                url: `/editar?id=${id}`,
+                                url: $(this).attr('action'),
                                 type: 'POST',
-                                contentType: 'application/json',
-                                data: JSON.stringify(datos),
+                                data: $(this).serialize(),
                                 success: function () {
                                     alert('Trabajador actualizado correctamente');
-                                    $('#modalEditar').modal('hide');
+                                    modal.hide();
                                     location.reload();
                                 },
                                 error: function () {

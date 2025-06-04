@@ -19,16 +19,18 @@
                     <div class="mb-3">
                         <label for="edit-nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="edit-nombre" name="nombre" th:field="*{nombre}" required>
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="edit-apellido" class="form-label">Apellido</label>
                         <input type="text" class="form-control" id="edit-apellido" name="apellido" th:field="*{apellido}" required>
+                        <div class="alert alert-warning" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="edit-departamento" class="form-label">Departamento</label>
-                        <select class="form-control" id="edit-departamento" name="departamento.id" th:field="*{departamento}" required>
+                        <select class="form-control" id="edit-departamento" name="departamentoId" th:field="*{departamentoId}" required>
                             <option value="" disabled selected>Seleccione un departamento</option>
                             <option th:each="dep : ${departamentos}"
                                     th:value="${dep.id}"
