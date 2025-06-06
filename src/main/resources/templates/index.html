@@ -36,7 +36,7 @@
                 <td th:text="${trabajador.id}"></td>
                 <td th:text="${trabajador.nombre}"></td>
                 <td th:text="${trabajador.apellido}"></td>
-                <td th:text="${trabajador.departamento.nombre}"></td>
+                <td th:text="${trabajador.departamentoNombre}"></td>
                 <td>
                    <button class="btn btn-danger borrar-btn" th:data-id="${trabajador.id}">Borrar</button>
                 </td>
@@ -47,7 +47,7 @@
                              th:attr="data-id=${trabajador.id},
                                 data-nombre=${trabajador.nombre},
                                 data-apellido=${trabajador.apellido},
-                                data-departamento=${trabajador.departamento.id}">Editar</button>
+                                data-departamento=${trabajador.departamentoId}">Editar</button>
                 </td>
             </tr>
             </tbody>

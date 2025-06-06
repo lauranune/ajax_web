@@ -1,6 +1,7 @@
 package com.example.pildoras_mvc.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
@@ -16,7 +17,11 @@ public class TrabajadorDto implements Serializable {
     @Size(min = 2, max = 50)
     private String apellido;
 
+    @NotNull(message = "El departamento es obligatorio")
     private Long departamentoId;
+
+    @NotEmpty(message = "El departamento es obligatorio")
+    private String departamentoNombre;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -29,4 +34,8 @@ public class TrabajadorDto implements Serializable {
 
     public Long getDepartamentoId() { return departamentoId; }
     public void setDepartamentoId(Long departamentoId) { this.departamentoId = departamentoId; }
+
+    public String getDepartamentoNombre() { return departamentoNombre; }
+
+    public void setDepartamentoNombre(String departamentoNombre) {this.departamentoNombre = departamentoNombre;}
 }

@@ -16,20 +16,12 @@ public interface TrabajadorMapper {
     @Mapping(target = "departamento.id", source = "departamentoId")
     Trabajador toEntity(TrabajadorDto dto);
 
-    @Mapping(source = "departamento.id", target = "departamentoId")
-    TrabajadorDto toTrabajadorDto(Trabajador entity);
-
     List<TrabajadorDto> toTrabajadorDto(List<Trabajador> trabajadores);
 
     @Mapping(target = "departamento.id", source = "departamentoId")
     void updateTrabajador(@MappingTarget Trabajador trabajador, TrabajadorDto dto);
 
-    //    Trabajador toEntity(TrabajadorDto dto);
-//
-//    TrabajadorDto toTrabajadorDto(Trabajador entity);
-//
-//    List<TrabajadorDto> toTrabajadorDto(List<Trabajador> trabajadores);
-//
-//    @Mapping(target = "departamento.id", source = "departamentoId")
-//    void updateTrabajador(@MappingTarget Trabajador trabajador, TrabajadorDto dto);
+    @Mapping(source = "departamento.id", target = "departamentoId")
+    @Mapping(source = "departamento.nombre", target = "departamentoNombre")
+    TrabajadorDto toTrabajadorDto(Trabajador entity);
 }

@@ -30,7 +30,10 @@ public class TrabajadorController {
     @GetMapping("/")
     public String index(Model model) {
       List <Trabajador> trabajadores = trabajadorRepository.findAll();
-      model.addAttribute("trabajadores", trabajadores);
+      List <TrabajadorDto> dtos= trabajadores.stream()
+              .map(trabajadorMapper::toTrabajadorDto)
+              .toList();
+      model.addAttribute("trabajadores", dtos);
       return "index";
   }
 

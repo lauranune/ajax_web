@@ -22,6 +22,15 @@ public class Trabajador {
     @JoinColumn(name="departamento_id")
     private Departamento departamento;
 
+    public Trabajador(Long id, String nombre, String apellido, Departamento departamento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.departamento = departamento;
+    }
+
+    public Trabajador() {}
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
